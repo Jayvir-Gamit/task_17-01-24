@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Task 1 of JS</title>
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        .nav {
+            padding: 0px 50px;
+            /* border: 2px solid blue; */
+            background-color: lightseagreen;
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-family: sans-serif;
+            font-weight: 500;
+        }
+
+        .left span {
+            font-size: large;
+            padding: 5px 15px;
+            margin: 5px;
+            border-right: 2px solid #ffffff4f;
+            font-family: system-ui;
+        }
+
+        .left ul {
+            list-style-type: none;
+            display: contents;
+        }
+
+        .left ul li {
+            margin: 5px;
+            padding: 5px;
+            border-right: 2px solid #ffffff4f;
+            padding-right: 15px;
+        }
+
+        .left ul li a i {
+            color: white;
+        }
+
+        .center a {
+            text-decoration: none;
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            color: white;
+            font-family: system-ui;
+            font-weight: 500;
+        }
+
+        .right ul {
+            list-style-type: none;
+            display: contents;
+        }
+
+        .right ul li {
+            margin: 5px;
+            padding: 5px;
+            border-left: 2px solid #ffffff4f;
+            padding-left: 15px;
+        }
+
+        .right li div i {
+            color: white;
+            /* padding: 5px; */
+        }
+
+        .right li div select {
+            background-color: unset;
+            border: none;
+            color: white;
+            font-size: large;
+            font-family: system-ui;
+        }
+
+        .right li div select option {
+            color: black;
+        }
+
+        .right a.loginbtn {
+            font-size: large;
+            cursor: pointer;
+        }
+
+        .co_header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid whitesmoke;
+            background-color: white;
+            font-family: system-ui;
+            font-weight: 500;
+        }
+
+        .co_header ul {
+            display: contents;
+            list-style-type: none;
+        }
+
+        .co_header ul li {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .co_header ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .co_header ul li ul {
+            border: 2px solid whitesmoke;
+            border-radius: 5px;
+            background-color: white;
+            display: none;
+            position: absolute;
+            padding: 0px;
+            margin: 15px;
+            z-index: 2;
+        }
+
+        .co_header ul li ul li {
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100px;
+        }
+
+        /* login sidebar */
+        .sidebar {
+            background-color: rgb(24, 22, 22);
+            position: absolute;
+            top: 0%;
+            right: 0%;
+            z-index: 1;
+            transition: transform 1s;
+            transform: scale(0);
+        }
+
+        .sidebar div.sideheader {
+            border-bottom: 2px solid white;
+            height: 50px;
+            position: relative;
+            top: 2%;
+            margin: 0px 0px;
+            padding: 0px 20px;
+        }
+
+        .sidebar div.sideheader span.close {
+            color: white;
+            font-size: x-large;
+            float: right;
+            clear: both;
+            cursor: pointer;
+            font-family: system-ui;
+            transition: transform 500ms;
+        }
+
+        .sidebar div.sideheader span.close:hover {
+            transform: rotate(180deg);
+        }
+
+        .sidebar div.sidebody {
+            position: relative;
+            top: 5%;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            grid-template-columns: auto;
+            gap: 10px;
+        }
+
+        .sidebar div.sidebody input {
+            width: 250px;
+            border: 1px solid rgb(210, 200, 200);
+            border-radius: 5px;
+            /* background-color: whitesmoke; */
+            height: 20px;
+            padding: 10px
+        }
+
+        /* .sidebar div.sidebody button {
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+            position: absolute;
+            left: 6.8%;
+            bottom: -20%;
+            font-family: system-ui;
+            font-weight: 600;
+        } */
+
+        .sidebar div.sidebody input.inputbtn:hover {
+            background-color: lightgreen;
+            cursor: pointer;
+        }
+
+        .slider {
+            margin: 0px 100px;
+            padding: 0px 20px;
+        }
+
+        .slider div.imgcont {
+            position: relative;
+            height: 700px;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .slider img.active {
+            display: block;
+        }
+
+        .slider button {
+            width: 50px;
+            height: 50px;
+            background: lightslategray;
+            color: white;
+            border: unset;
+            border-radius: 5px;
+            font-size: 15px;
+            position: absolute;
+            top: 70%;
+            transform: translateY(-50%);
+        }
+
+        .slider button:hover {
+            background: grey;
+        }
+
+        .slider button.previous {
+            left: 15%;
+        }
+
+        .slider button.next {
+            right: 15%;
+        }
+
+        .imgswitch {
+            padding: 200px;
+            display: grid;
+            grid-template-columns: auto;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            background-color: whitesmoke;
+        }
+
+        .groupbtn {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap: 20px;
+            /* justify-content: center;
+            align-items: center; */
+        }
+
+        .groupbtn button {
+            padding: 10px;
+            border: unset;
+            border-radius: 5px;
+            font-family: system-ui;
+            font-weight: 500;
+            background-color: lightgray;
+        }
+
+        .groupbtn button:nth-child(1) {
+            float: left;
+            clear: both;
+        }
+
+        .groupbtn button:hover {
+            background-color: rgb(207, 200, 200);
+        }
+
+        .imgcontainer {
+            height: 400px;
+        }
+
+        .imgcontainer img {
+            height: 100%;
+            width: 100%;
+            display: none;
+        }
+
+        .imgcontainer img.active {
+            display: block;
+        }
+
+        .foodContainer {
+            margin: 50px;
+        }
+
+        .allbtns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
+            margin-bottom: 20px;
+        }
+
+        .allbtns button {
+            background: #2690bf2b;
+            color: #2690BF;
+            border-width: 3px 0px;
+            border-radius: 5px;
+            font-family: system-ui;
+            font-size: large;
+            padding: 10px 20px;
+            transition: border-width 0.1s;
+        }
+
+        .allbtns button:hover {
+            border-width: 0px 3px;
+        }
+
+        .card1 {
+            background: #F8F8F8;
+            box-shadow: 3px 4px 7px -6px rgb(0 0 0 / 60%);
+            border-radius: 10px;
+            padding: 10px;
+            /* width: 23%; */
+            margin-bottom: 15px;
+        }
+
+        .card1 img {
+            object-fit: cover;
+            transition: all .5s;
+            /* width: 100%; */
+            display: block;
+            border-radius: 10px;
+            position: relative;
+            height: 250px;
+            width: 320px;
+        }
+
+        .card1 h4 {
+            font-family: system-ui;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 26px;
+            color: black;
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .sameclass {
+            flex-wrap: wrap;
+            justify-content: space-between;
+            position: relative;
+            display: none;
+        }
+
+        .foodimgcont div.active {
+            display: flex;
+        }
+
+        @media screen and (min-width: 300px) and (max-width: 1023px) {
+            body {
+                margin: 0px;
+                padding: 0px;
+                width: 100%;
+                height: 100%;
+            }
+
+            .co_header {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media screen and (min-width: 300px) and (max-width: 820px) {
+            .nav {
+                grid-template-columns: auto;
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 819px) {
+            .slider {
+                margin: 0px;
+            }
+
+            .slider button {
+                top: 70%;
+                width: 40px;
+                height: 40px;
+            }
+
+            .slider div.imgcont {
+                height: 400px;
+            }
+
+            .allbtns {
+                row-gap: 20px;
+                column-gap: 40px;
+                flex-wrap: wrap;
+            }
+
+            .allbtns button {
+                padding: 5px 10px;
+            }
+        }
+
+        @media screen and (min-width: 503px) and (max-width: 768px) {
+
+            /* .nav {
+                grid-template-columns: auto;
+            } */
+            /* .co_header {
+                flex-wrap: wrap;
+            } */
+            .slider {
+                margin: 0px;
+            }
+
+            .slider button {
+                top: 70%;
+                width: 30px;
+                height: 30px;
+            }
+
+            .slider div.imgcont {
+                height: 400px;
+            }
+
+            .allbtns {
+                row-gap: 20px;
+                column-gap: 20px;
+                flex-wrap: wrap;
+            }
+
+            .allbtns button {
+                padding: 5px 10px;
+            }
+
+            .foodContainer {
+                margin: 0px;
+                padding: 20px;
+            }
+
+            .imgcontainer {
+                height: 300px;
+            }
+
+            .imgswitch {
+                padding: 200px 50px;
+            }
+        }
+
+        @media screen and (min-width: 375px) and (max-width: 502px) {
+            .slider {
+                margin: 0px;
+            }
+
+            .slider button {
+                top: 80%;
+                width: 30px;
+                height: 30px;
+            }
+
+            .slider div.imgcont {
+                height: 400px;
+            }
+
+            .allbtns {
+                row-gap: 5px;
+                column-gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .allbtns button {
+                padding: 5px 10px;
+            }
+
+            .foodContainer {
+                margin: 0px;
+                padding: 20px;
+            }
+
+            .imgcontainer {
+                height: 300px;
+            }
+
+            .imgswitch {
+                padding: 200px 50px;
+            }
+        }
+
+        @media screen and (min-width: 300px) and (max-width: 374px) {
+            .slider {
+                margin: 0px;
+            }
+
+            .slider button {
+                top: 73%;
+                width: 25px;
+                height: 25px;
+            }
+
+            .slider div.imgcont {
+                height: 300px;
+            }
+
+            .allbtns {
+                row-gap: 5px;
+                column-gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .allbtns button {
+                padding: 5px 10px;
+            }
+
+            .foodContainer {
+                margin: 0px;
+                /* padding: 20px; */
+            }
+
+            .imgcontainer {
+                height: 250px;
+            }
+
+            .imgswitch {
+                padding: 200px 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="nav">
+        <div class="left">
+            <span>Follow On: </span>
+            <ul>
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="center">
+            <a href="./index.html">
+                <h1>FOOD CAFE</h1>
+            </a>
+        </div>
+        <div class="right">
+            <ul>
+                <li>
+                    <div class="language">
+                        <i class="fa-solid fa-earth-americas"></i>
+                        <select id="selectlan" name="dropdown">
+                            <option value="">English</option>
+                            <option value="">Italian</option>
+                            <option value="">France</option>
+                            <option value="">Spanish</option>
+                            <option value="">Poland</option>
+                            <option value="">German</option>
+                        </select>
+                    </div>
+                </li>
+                <li>
+                    <a class="loginbtn" onclick="openloginbar()">LOGIN</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- login sidebar -->
+    <div class="sidebar">
+        <div class="sideheader">
+            <p style="font-family: system-ui; display: inline; color: white; font-size: x-large;">
+                <span style="font-weight: bold;">LOGIN</span>
+            </p>
+            <!-- <span class="close" onclick="hideloginbar()">&#128937;</span> -->
+            <span class="close" onclick="hideloginbar()">X</span>
+        </div>
+        <div class="sidebody">
+            <input class="emailclass" type="email" name="email" placeholder="Email" onkeyup="emailvalidation()"
+                style="text-transform: lowercase;">
+            <input class="pwclass" type="password" name="password" placeholder="password" onkeyup="pwvalidation()">
+            <div style="display: flex; align-items: center; margin: 10px 0px; margin-bottom: 0px;">
+                <input type="checkbox" onclick="showPw()" style="width: 20px; margin-left: 0px; margin-right: 10px;">
+                <span style="font-family: system-ui; font-weight: 500; color: white;">Show Password</span>
+            </div>
+            <p style="font-family: system-ui; font-weight: 600;" class="demo"></p>
+            <!-- <button onclick="loginsubmit()">SUBMIT</button> -->
+            <input class="inputbtn" style="width: 70px; height: 40px; font-family: system-ui; font-weight: 600;" type="submit"
+                name="submit" onclick="return loginsubmit()"></input>
+        </div>
+    </div>
+    <!-- Co-header -->
+    <div class="co_header">
+        <ul>
+            <li onclick="show1()">
+                <a href="#">Home</a>
+                <ul class="drop1">
+                    <li>
+                        <a href="#">Home1</a>
+                        <a href="#">Home2</a>
+                        <a href="#">Home3</a>
+                    </li>
+                </ul>
+            </li>
+            <li onclick="show2()">
+                <a href="#">About Us</a>
+                <ul class="drop2">
+                    <li>
+                        <a href="#">Who We Are</a>
+                        <a href="#">Team</a>
+                        <a href="#">FAQ</a>
+                    </li>
+                </ul>
+            </li>
+            <li onclick="show3()">
+                <a href="#">Services</a>
+                <ul class="drop3">
+                    <li>
+                        <a href="#">Service1</a>
+                        <a href="#">Service2</a>
+                        <a href="#">Service3</a>
+                    </li>
+                </ul>
+            </li>
+            <li onclick="show4()">
+                <a href="#">Gallery</a>
+                <ul class="drop4">
+                    <li>
+                        <a href="#">Gallery1</a>
+                        <a href="#">Gallery2</a>
+                        <a href="#">Gallery3</a>
+                    </li>
+                </ul>
+            </li>
+            <li onclick="show5()">
+                <a href="#">Contact Us</a>
+                <ul class="drop5">
+                    <li>
+                        <a href="#">Contact1</a>
+                        <a href="#">Contact2</a>
+                        <a href="#">Contact3</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- Slider -->
+    <div class="slider">
+        <div class="imgcont">
+            <img id="image1" src="./img1.jpg" alt="" class="active">
+            <img id="image2" src="./img2.jpg" alt="">
+            <img id="image3" src="./img3.jpg" alt="">
+        </div>
+        <button class="previous" onclick="prebtn()">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="next" onclick="nextbtn()">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+    <!-- Button image Switch -->
+    <div class="imgswitch">
+        <div class="groupbtn">
+            <button onclick="home()">Home</button>
+            <button onclick="service()">Service</button>
+            <button onclick="contact()">Contact</button>
+        </div>
+        <div class="imgcontainer">
+            <img src="./img1.jpg" alt="" id="image4" class="active">
+            <img src="./img2.jpg" alt="" id="image5">
+            <img src="./img3.jpg" alt="" id="image6">
+        </div>
+    </div>
+    <!-- Food Container -->
+    <div class="foodContainer">
+        <div class="allbtns">
+            <button onclick="coffee()">Coffee</button>
+            <button onclick="drink()">Cold Drinks</button>
+            <button onclick="fastfood()">Fastfood</button>
+            <button onclick="tea()">Tea</button>
+            <button onclick="allItems()">All</button>
+        </div>
+        <div class="foodimgcont">
+            <div id="box1" class="active sameclass">
+                <div class="card1">
+                    <img src="./Coffee/Cappuccino.jpg" alt="">
+                    <h4>Cappuccino</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Coffee/Espresso.jpg" alt="">
+                    <h4>Espresso</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Coffee/Caffe_Latte.jpg" alt="">
+                    <h4>Caffe Latte</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Coffee/Cold_Brew.jpg" alt="">
+                    <h4>Cold Brew</h4>
+                </div>
+            </div>
+            <div id="box2" class="sameclass">
+                <div class="card1">
+                    <img src="./ColdDrinks/Sprite.jpg" alt="">
+                    <h4>Sprite</h4>
+                </div>
+                <div class="card1">
+                    <img src="./ColdDrinks/Thums_Up.jpg" alt="">
+                    <h4>Thums Up</h4>
+                </div>
+                <div class="card1">
+                    <img src="./ColdDrinks/Pepsi.jpg" alt="">
+                    <h4>Pepsi</h4>
+                </div>
+                <div class="card1">
+                    <img src="./ColdDrinks/cococola.jpg" alt="">
+                    <h4>Cococola</h4>
+                </div>
+            </div>
+            <div id="box3" class="sameclass">
+                <div class="card1">
+                    <img src="./FastFood/kfc_burger.jpg" alt="">
+                    <h4>KFC Burger</h4>
+                </div>
+                <div class="card1">
+                    <img src="./FastFood/Pizza.jpg" alt="">
+                    <h4>Pizza</h4>
+                </div>
+                <div class="card1">
+                    <img src="./FastFood/Taco.jpg" alt="">
+                    <h4>Toco</h4>
+                </div>
+                <div class="card1">
+                    <img src="./FastFood/french_fries.jpg" alt="">
+                    <h4>French Fries</h4>
+                </div>
+            </div>
+            <div id="box4" class="sameclass">
+                <div class="card1">
+                    <img src="./Tea/Black_Tea.jpg" alt="">
+                    <h4>Black Tea</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Tea/Green_Tea.jpg" alt="">
+                    <h4>Green Tea</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Tea/Herbal_Tea.jpg" alt="">
+                    <h4>Herbal Tea</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Tea/Oolong_Tea.jpg" alt="">
+                    <h4>Oolong Tea</h4>
+                </div>
+            </div>
+            <div id="box5" class="sameclass">
+                <div class="card1">
+                    <img src="./Coffee/Cappuccino.jpg" alt="">
+                    <h4>Cappuccino</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Coffee/Espresso.jpg" alt="">
+                    <h4>Espresso</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Coffee/Caffe_Latte.jpg" alt="">
+                    <h4>Caffe Latte</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Coffee/Cold_Brew.jpg" alt="">
+                    <h4>Cold Brew</h4>
+                </div>
+                <div class="card1">
+                    <img src="./ColdDrinks/Sprite.jpg" alt="">
+                    <h4>Sprite</h4>
+                </div>
+                <div class="card1">
+                    <img src="./ColdDrinks/Thums_Up.jpg" alt="">
+                    <h4>Thums Up</h4>
+                </div>
+                <div class="card1">
+                    <img src="./ColdDrinks/Pepsi.jpg" alt="">
+                    <h4>Pepsi</h4>
+                </div>
+                <div class="card1">
+                    <img src="./ColdDrinks/cococola.jpg" alt="">
+                    <h4>Cococola</h4>
+                </div>
+                <div class="card1">
+                    <img src="./FastFood/kfc_burger.jpg" alt="">
+                    <h4>KFC Burger</h4>
+                </div>
+                <div class="card1">
+                    <img src="./FastFood/Pizza.jpg" alt="">
+                    <h4>Pizza</h4>
+                </div>
+                <div class="card1">
+                    <img src="./FastFood/Taco.jpg" alt="">
+                    <h4>Toco</h4>
+                </div>
+                <div class="card1">
+                    <img src="./FastFood/french_fries.jpg" alt="">
+                    <h4>French Fries</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Tea/Black_Tea.jpg" alt="">
+                    <h4>Black Tea</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Tea/Green_Tea.jpg" alt="">
+                    <h4>Green Tea</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Tea/Herbal_Tea.jpg" alt="">
+                    <h4>Herbal Tea</h4>
+                </div>
+                <div class="card1">
+                    <img src="./Tea/Oolong_Tea.jpg" alt="">
+                    <h4>Oolong Tea</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="./index.js"></script>
+
+</html>
